@@ -1,7 +1,5 @@
 $(document).ready(function(){
-    //at header create current date:
-    //need moment.js
-    //append to display Day, Month, Date, Year
+
     let today = moment().format('dddd, MMM Do YYYY');
     $("#currentDay").append(today);
 
@@ -12,17 +10,17 @@ $(document).ready(function(){
     let textArea;
     let saveBtn;
     let saveIcon;
-    // let timeBlock = $("time-block");
+
     let workSchedule = {
-        "9:00AM" :"test",
-        "10:00AM":"",
-        "11:00AM":"",
-        "12:00AM":"",
-        "1:00PM":"",
-        "2:00PM":"",
-        "3:00PM":"",
-        "4:00PM":"",
-        "5:00PM":""
+        "9:00 AM" :"",
+        "10:00 AM":"",
+        "11:00 AM":"",
+        "12:00 AM":"",
+        "1:00 PM":"",
+        "2:00 PM":"",
+        "3:00 PM":"",
+        "4:00 PM":"",
+        "5:00 PM":""
     };
 
    //Call local storage at start of page
@@ -37,19 +35,31 @@ $(document).ready(function(){
     $(".time-block").append(row);
     //create collums
     hour = $("<div>").addClass("col-2 hour").text(time);
+    
+
+    // textArea = $("<textarea>").addClass("col 8 description").text(todoItem);
+    let now = moment().format('LT');
     console.log(time);
-    row.append(hour);
-    //text
-    // col = $("<div>").addClass("col-8");
-    textArea = $("<textarea>").addClass("col 8 description").text(todoItem);
-    // col.append(textArea);
-    row.append(textArea);
+    console.log(now);
+    
+    if(time < now){
+        textArea = $("<textarea>").addClass("col 8 description past").text(todoItem);
+    } else if(time === now){
+            textArea = $("<textarea>").addClass("col 8 description present").text(todoItem);
+    } else { textArea = $("<textarea>").addClass("col 8 description future").text(todoItem)};
+        
+
     saveBtn = $("<div>").addClass("col-2 saveBtn");
     saveIcon = $("<i>").addClass("fa fa-save");
     saveBtn.append(saveIcon);
 
-    row.append(saveBtn);
+    row.append(hour, textArea, saveBtn);
     
+
+
+
+
+
 
     });
 
