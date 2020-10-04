@@ -23,10 +23,10 @@ $(document).ready(function(){
         "5:00 PM":""
     };
 
-   //Call local storage at start of page
+   //Need to call local storage at start of page
     //renderLastSchedule();
     //make function scheduledItem to call local storage.
-    //var renderLastSchedule = local.storage.getItem("saveItem");
+    //var renderLastSchedule = local.storage.getItem("saveSchedule");??
 
     $.each(workSchedule, function(time, todoItem){
     //create row
@@ -53,33 +53,19 @@ $(document).ready(function(){
     saveBtn.append(saveIcon);
 
     $(saveBtn).on("click", function(){
-        // alert("I'm clicked");
-
-
-
-
+       
+    // save input value to local Storage
+    // localStorage.setItem("schedule", workSchedule)
 
     })
 
-
-
-
     row.append(hour, textArea, saveBtn);
     
-
-
-
-
-
-
     });
 
-// if tab save is click:
-    //.click, function(){}
-        // to save input item
+
     
-// save input value to local Storage
-    // localStorage.setItem("schedule", saveItem)
+
 
 
 
