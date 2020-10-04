@@ -33,25 +33,36 @@ $(document).ready(function(){
 
     row = $("<div>").addClass("row");
     $(".time-block").append(row);
+
     //create collums
     hour = $("<div>").addClass("col-2 hour").text(time);
-    
 
-    // textArea = $("<textarea>").addClass("col 8 description").text(todoItem);
     let now = moment().format('LT');
     console.log(time);
     console.log(now);
     
     if(time < now){
         textArea = $("<textarea>").addClass("col 8 description past").text(todoItem);
-    } else if(time === now){
-            textArea = $("<textarea>").addClass("col 8 description present").text(todoItem);
-    } else { textArea = $("<textarea>").addClass("col 8 description future").text(todoItem)};
+    } else if(time > now){
+            textArea = $("<textarea>").addClass("col 8 description future").text(todoItem);
+    } else { 
+        textArea = $("<textarea>").addClass("col 8 description present").text(todoItem)};
         
-
     saveBtn = $("<div>").addClass("col-2 saveBtn");
     saveIcon = $("<i>").addClass("fa fa-save");
     saveBtn.append(saveIcon);
+
+    $(saveBtn).on("click", function(){
+        // alert("I'm clicked");
+
+
+
+
+
+    })
+
+
+
 
     row.append(hour, textArea, saveBtn);
     
