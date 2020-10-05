@@ -2,7 +2,7 @@ let workSchedule = {
     "9:00 AM":"",
     "10:00 AM":"",
     "11:00 AM":"",
-    "12:00 AM":"",
+    "12:00 PM":"",
     "1:00 PM":"",
     "2:00 PM":"",
     "3:00 PM":"",
@@ -14,28 +14,14 @@ function currentDay(){
     let today = moment().format('dddd, MMM Do YYYY');
     $("#currentDay").append(today);
 }
-    
-function getScedule(){
-//Need to call local storage at start of page
-    //renderLastSchedule();
-    //make function scheduledItem to call local storage.
-    //var renderLastSchedule = local.storage.getItem("saveSchedule");??
 
-}
-
-function saveSchedule(){
- // save input value to local Storage
-        // localStorage.setItem("schedule", workSchedule)
-    
-
-}
  
 function renderScedule(){
      
     //variables needed to make the row
     
     let row;
-    let midCol;
+    // let midCol;
     let hour;
     let textArea;
     let saveBtn;
@@ -52,32 +38,64 @@ function renderScedule(){
         hour = $("<div>").addClass("col-2 hour").text(time);
     
         now = moment().format('LT');
-        console.log(time);
-        console.log(now);
+        // console.log(time);
+        console.log("---------------------------")
+
+        now = moment(now, "h:mma");
+        time = moment(time, "h:mma");
+        //check console
+        console.log("now: ", now._i);
+        console.log("time: ", time._i);
+        console.log("now.isBefore(givenTime): ", now.isBefore(time));
+        console.log("now.isAfter(givenTime): ", now.isAfter(time));
+
+        let future = now.isBefore(time);
+
+        if (future){
+            textArea = $("<textarea>").addClass("text col-8 description future").text(todoItem);
+
+        } else if (time === now) {
+            textArea = $("<textarea>").addClass("text col-8 description present").text(todoItem);
+
+        } else{
+            textArea = $("<textarea>").addClass("text col-8 description past").text(todoItem);
+
+        }; 
         
-        if(time < now){
-            textArea = $("<textarea>").addClass("col 8 description past").text(todoItem);
-        } else if(time > now){
-                textArea = $("<textarea>").addClass("col 8 description future").text(todoItem);
-        } else { 
-            textArea = $("<textarea>").addClass("col 8 description present").text(todoItem)};
-            
+                   
         saveBtn = $("<div>").addClass("col-2 saveBtn");
         saveIcon = $("<i>").addClass("fa fa-save");
-        saveBtn.append(saveIcon);
-    
-        $(saveBtn).on("click", function(){
-           
-       
+   
+        saveBtn.data("hour", time);
+
+
+        $(saveBtn).on("click", function(event){
+           let hour = $(event.target).data("hour");
+           let textAreaVallue = $(event.target).sibling(".description").val;
+           schedule[time] = textAreaVallue;
+           saveSchedule();
         })
-    
+
+        saveBtn.append(saveIcon);
         row.append(hour, textArea, saveBtn);
         
         });
     
     
 }
-   
+function saveSchedule(){
+    
+    localStorage.setItem("workday", JSON.stringify(schedule));
+       
+}   
+    
+function getScedule(){
+    if (localStorage.getItem("workday")){
+        schedule = JSON.parse (localStorage.getItem("workday"));
+    }
+}
+
+    
     
 function initialize(){
     currentDay();

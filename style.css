@@ -23,7 +23,7 @@ textarea{
 
 .description{
   white-space: pre-wrap;
-  background: rgb(219, 164, 183);
+  /* background: rgb(219, 164, 183); */
 }
 
 .time-block{
