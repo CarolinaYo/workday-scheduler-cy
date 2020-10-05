@@ -1,3 +1,7 @@
+$(document).ready(function(){    
+    initialize();
+})
+
 let workSchedule = {
     "9:00 AM":"",
     "10:00 AM":"",
@@ -15,13 +19,24 @@ function currentDay(){
     $("#currentDay").append(today);
 }
 
- 
+
+function getScedule(){
+    if (localStorage.getItem("workday")){
+        workSchedule = JSON.parse (localStorage.getItem("workday"));
+    }
+} 
+
+function saveSchedule(){
+    
+    localStorage.setItem("workday", JSON.stringify(workSchedule));
+       
+}   
+    
 function renderScedule(){
      
     //variables needed to make the row
     
     let row;
-    // let midCol;
     let hour;
     let textArea;
     let saveBtn;
@@ -47,14 +62,14 @@ function renderScedule(){
         console.log("now: ", now._i);
         console.log("time: ", time._i);
         console.log("now.isBefore(givenTime): ", now.isBefore(time));
-        console.log("now.isAfter(givenTime): ", now.isAfter(time));
+      
 
         let future = now.isBefore(time);
 
         if (future){
             textArea = $("<textarea>").addClass("text col-8 description future").text(todoItem);
 
-        } else if (time === now) {
+        } else if (now === time) {
             textArea = $("<textarea>").addClass("text col-8 description present").text(todoItem);
 
         } else{
@@ -70,9 +85,13 @@ function renderScedule(){
 
 
         $(saveBtn).on("click", function(event){
+
            let hour = $(event.target).data("hour");
-           let textAreaVallue = $(event.target).sibling(".description").val;
-           schedule[time] = textAreaVallue;
+           let parentCol = $(event.target).parent();
+           let textAreaValue = parentCol.children(".description").val();
+          
+          
+           workSchedule[time] = textAreaValue;
            saveSchedule();
         })
 
@@ -81,19 +100,11 @@ function renderScedule(){
         
         });
     
-    
-}
-function saveSchedule(){
-    
-    localStorage.setItem("workday", JSON.stringify(schedule));
        
-}   
-    
-function getScedule(){
-    if (localStorage.getItem("workday")){
-        schedule = JSON.parse (localStorage.getItem("workday"));
-    }
+        
+            
 }
+
 
     
     
@@ -105,11 +116,6 @@ function initialize(){
 }
 
 
-$(document).ready(function(){
-        //function call....
-        initialize();
 
-
-})
 
 
