@@ -18,11 +18,15 @@ Language used:
 ##  APPLICATION PREVIEW
 
 
-### 1. User will begin on the start page:
+### 1. User is presented with start page that display the current day and date.
 
 ![Start page](
 
-### 2. 
+### 2. Then user can input descriptions and their activity of the day on the appropriate time slot.
+
+* The scheduler's time block is color coded to represent the time that has past, at present and future.
+
+### 3. User can save and record their planner by clicking the save button and be automatically displayed again on the next session.
 
 
 
