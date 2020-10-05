@@ -32,4 +32,4 @@ Language used:
 ## MAINTAINER 
 This is an individual assignment created by Carolina Yoedhana.
 * GitHub Link: https://github.com/CarolinaYo/workday-scheduler-cy.git
-* GitPage Link: 
+* GitHub Page Link: https://carolinayo.github.io/workday-scheduler-cy/
