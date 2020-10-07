@@ -2,7 +2,7 @@
 
 ## INRODUCTION 
 
-This "Workday Scheduler" application is a day planner that allows user to input and record to-do items in the time slot with a given pre-set time block.  To asist user with its current state of time in the day planner, the planner is color coded to represent its relation to the current time.  
+This "Workday Scheduler" application is a day planner that allows user to input and record to-do items in the time slot with a given pre-set time block.  Using Moment.js, user can input todo items with its current state of time in the day planner, the planner is color coded to represent its relation to the current time.  
 
 ## REQUIREMENT
 
@@ -12,8 +12,9 @@ This application must be able to process:
 
 Language used:
 * Html
-* CSS
+* Bootstrap
 * JavaScript
+* Moment.js
 
 ##  APPLICATION PREVIEW
 

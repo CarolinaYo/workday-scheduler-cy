@@ -26,7 +26,7 @@ function getScedule() {
 }
 
 function saveSchedule() {
-  localStorage.setItem("workday", JSON.stringify(workSchedules));
+  localStorage.setItem("workday", JSON.stringify(workSchedule));
 }
 
 function renderScedule() {
@@ -41,7 +41,6 @@ function renderScedule() {
 
   $.each(workSchedule, function (time, todoItem) {
     //create row
-
     row = $("<div>").addClass("row");
     $(".time-block").append(row);
 
@@ -58,14 +57,16 @@ function renderScedule() {
     console.log("now: ", now._i);
     console.log("time: ", time._i);
     console.log("now.isBefore(givenTime): ", now.isBefore(time));
+    console.log("now.isSame(givenTime): ", now.isSame(time));
 
     let future = now.isBefore(time);
+    let present = now.isSame(time);
 
     if (future) {
       textArea = $("<textarea>")
         .addClass("text col-8 description future")
         .text(todoItem);
-    } else if (now === time) {
+    } else if (present) {
       textArea = $("<textarea>")
         .addClass("text col-8 description present")
         .text(todoItem);
@@ -78,24 +79,27 @@ function renderScedule() {
     saveBtn = $("<div>").addClass("col-2 saveBtn");
     saveIcon = $("<i>").addClass("fa fa-save");
 
-    saveBtn.data("hour", time);
+    // saveBtn.data("hour", time);
 
     $(saveBtn).on("click", function (event) {
-      let hour = $(event.target).data("hour");
+      // let hour = $(event.target).data("hour");
       let parentCol = $(event.target).parent();
       let textAreaValue = parentCol.children(".description").val();
 
-      workSchedule[time] = textAreaValue;
+      workSchedule = textAreaValue;
       saveSchedule();
     });
 
     saveBtn.append(saveIcon);
     row.append(hour, textArea, saveBtn);
+    
   });
 }
 
 function initialize() {
   currentDay();
-  //getSchedule();
+
   renderScedule();
+
+  //   getScedule();
 }
