@@ -17,17 +17,15 @@ Language used:
 * Moment.js
 
 ##  APPLICATION PREVIEW
-
+![Start page](asset/dayplanner.gif)
 
 ### 1. User is presented with start page that display the current day and date.
-
-![Start page](asset/dayplanner.PNG)
-
 ### 2. Then user can input descriptions and their activity of the day on the appropriate time slot.
 
-* The scheduler's time block is color coded to represent the time that has past, at present and future. ![user entry](asset/userInput.PNG)
+* The scheduler's time block is color coded to represent the time that has past, at present and future. 
 
-### 3. User can save and record their planner by clicking the save button and will be displayed again on the next session.
+### 3. User can save and record their planner by clicking the save button and will be displayed again on the next session. 
+![Start page](asset/dayplanner.PNG)
 
 
 ## MAINTAINER 
