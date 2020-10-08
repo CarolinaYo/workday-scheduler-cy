@@ -1,7 +1,3 @@
-$(document).ready(function () {
-  initialize();
-});
-
 let workSchedule = {
   "9:00 AM": "",
   "10:00 AM": "",
@@ -19,7 +15,7 @@ function currentDay() {
   $("#currentDay").append(today);
 }
 
-function getScedule() {
+function getSchedule() {
   if (localStorage.getItem("workday")) {
     workSchedule = JSON.parse(localStorage.getItem("workday"));
   }
@@ -29,11 +25,10 @@ function saveSchedule() {
   localStorage.setItem("workday", JSON.stringify(workSchedule));
 }
 
-function renderScedule() {
-  //variables needed to make the row
-
+function renderSchedule() {
   let row;
   let hour;
+  let midDiv;
   let textArea;
   let saveBtn;
   let saveIcon;
@@ -48,58 +43,57 @@ function renderScedule() {
     hour = $("<div>").addClass("col-2 hour").text(time);
 
     now = moment().format("LT");
-    // console.log(time);
-    console.log("---------------------------");
-
-    now = moment(now, "h:mma");
-    time = moment(time, "h:mma");
-    //check console
-    console.log("now: ", now._i);
-    console.log("time: ", time._i);
-    console.log("now.isBefore(givenTime): ", now.isBefore(time));
-    console.log("now.isSame(givenTime): ", now.isSame(time));
+    now = moment(now, "ha");
+    time = moment(time, "ha");
 
     let future = now.isBefore(time);
-    let present = now.isSame(time);
+    let past = now.isAfter(time);
+
+    midDiv = $("<div>").addClass("col-8 mid-col");
+
+    textArea = $("<textarea>").addClass("description").text(todoItem);
 
     if (future) {
-      textArea = $("<textarea>")
-        .addClass("text col-8 description future")
-        .text(todoItem);
-    } else if (present) {
-      textArea = $("<textarea>")
-        .addClass("text col-8 description present")
-        .text(todoItem);
+      midDiv.addClass("future");
+    } else if (past) {
+      midDiv.addClass("past");
+      textArea.attr("readonly", true);
     } else {
-      textArea = $("<textarea>")
-        .addClass("text col-8 description past")
-        .text(todoItem);
+      midDiv.addClass("present");
     }
+
+    midDiv.append(textArea);
 
     saveBtn = $("<div>").addClass("col-2 saveBtn");
     saveIcon = $("<i>").addClass("fa fa-save");
 
-    // saveBtn.data("hour", time);
+    saveBtn.data("hour", time);
 
     $(saveBtn).on("click", function (event) {
-      // let hour = $(event.target).data("hour");
-      let parentCol = $(event.target).parent();
-      let textAreaValue = parentCol.children(".description").val();
+      let hour = $(event.target).parent().data("hour");
 
-      workSchedule = textAreaValue;
+      let textAreaValue = $(event.target)
+        .parent()
+        .siblings(".mid-col")
+        .children(".description")
+        .val();
+
+      workSchedule[hour._i] = textAreaValue;
+
       saveSchedule();
     });
 
     saveBtn.append(saveIcon);
-    row.append(hour, textArea, saveBtn);
-    
+    row.append(hour, midDiv, saveBtn);
   });
 }
 
 function initialize() {
   currentDay();
-
-  renderScedule();
-
-  //   getScedule();
+  getSchedule();
+  renderSchedule();
 }
+
+$(document).ready(function () {
+  initialize();
+});
