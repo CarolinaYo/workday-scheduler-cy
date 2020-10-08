@@ -7,8 +7,8 @@ This "Workday Scheduler" application is a day planner that allows user to input 
 ## REQUIREMENT
 
 This application must be able to process:
-* Allow user's input in it's description section.
-* Record the input and re-display saved record at start of session.
+* User's input in it's description section.
+* Record the input and re-display saved record at following of session.
 
 Language used:
 * Html
@@ -19,12 +19,14 @@ Language used:
 ##  APPLICATION PREVIEW
 ![Start page](asset/dayplanner1.gif)
 
+## STEPS
+
 ### 1. User is presented with start page that display the current day and date.
 ### 2. Then user can input descriptions and their activity of the day on the appropriate time slot.
 
 * The scheduler's time block is color coded to represent the time that has past, at present and future. 
 
-### 3. User can save and record their planner by clicking the save button and will be displayed again on the next session. 
+### 3. User can save details and descriptions typed in the planner. Details and descriptions saved will be displayed on user's next session. 
 ![Start page](asset/dayplanner1.PNG)
 
 
